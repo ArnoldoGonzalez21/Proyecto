@@ -23,7 +23,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" onclick = 'actualizar_datos()'>Actualizar Datos</a> 
+                            <a class="dropdown-item" >Actualizar Datos</a> 
                             <a class="dropdown-item" href="login.html">Cerrar Sesión</a>                           
                         </div>
                     </li>
@@ -36,11 +36,15 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Opciones</div>
-                            <a class="nav-link" onclick = "comprar_productos()">
+                            <a class="nav-link" onclick = "inicio()">
+                                <div class="sb-nav-link-icon"><i class="fas fa-house-user"></i></div>
+                                Inicio
+                            </a>
+                            <a class="nav-link" href = " " >
                                 <div class="sb-nav-link-icon"><i class="fas fa-calendar-check"></i></div>
                                 Comprar Productos
                             </a>
-                            <a class="nav-link" onclick = " ">
+                            <a class="nav-link" onclick = "ir_pedido_producto()">
                                 <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                                 Ver Lista de Compras
                             </a>
@@ -59,7 +63,7 @@
                             <div class="row">
                                 <div class="col"></br>                                
                                     <span class="float-left"> <h1 class="mt-4">Daxcsa</h1> </span> 
-                                    <span class="float-right"> <a id = "btnCarritoCompras" type="button" class="btn btn-success" onclick='ir_pedido_medicamento()'><i class="fas fa-shopping-cart"></i> Carrito</a></span> 
+                                    <span class="float-right"> <a id = "btnCarritoCompras" type="button" class="btn btn-success" onclick='ir_pedido_producto()'><i class="fas fa-shopping-cart"></i> Carrito</a></span> 
                                 </div>
                             </div>
                         </div>
@@ -113,13 +117,7 @@
                     console.log(compras.sort());
                 }
 
-                function s(){
-                    compras.forEach(function(elemento, indice, array) {
-                        console.log("elemento: ",elemento, " indice: ",indice);
-                    })
-                }
-
-                async function ir_pedido_medicamento(){
+                async function ir_pedido_producto(){
                     const indiceCliente = getParametro('indice');
                     while( compras.length > 0 ){
                         var indices = [];
@@ -134,7 +132,7 @@
                             posicion: compras[0],
                             compra: indices.length,
                             venta: indices.length,
-                            paciente: indiceCliente,
+                            cliente: indiceCliente,
                         })
                         const parametros={
                             headers:{
@@ -158,6 +156,11 @@
                 
                 function getParametro(nombre) {
                     return (window.location.search.match(new RegExp('[?&]' + nombre + '=([^&]+)')) || [, null])[1];
+                }                
+
+                function inicio(){
+                        indice = getParametro('indice');
+                        window.location.href = "cliente.html?indice="+indice;         
                 }
 
                 </script>

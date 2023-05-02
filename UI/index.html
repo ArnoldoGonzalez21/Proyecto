@@ -6,44 +6,38 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Daxcsa</title>
-        <link href="css/styles.css" rel="stylesheet" />     
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <link  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-        <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+        <title>Página Principal</title>
+        <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed">
+    <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand">Daxcsa</a>
-            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <a class="navbar-brand" href="index.html">Daxcsa</a>
+            <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <ul class="navbar-nav ml-auto ml-md-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item">Actualizar datos</a>  
-                            <a class="dropdown-item" href="login.html">Cerrar Sesión</a>                           
-                        </div>
-                    </li>
-                </ul>
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+                    </div>
+                </div>
             </form>
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Opciones</div>
-                            <a class="nav-link" onclick = "comprar_productos()">
-                                <div class="sb-nav-link-icon"><i class="fas fa-calendar-check"></i></div>
-                                Comprar Productos
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-file-signature"></i></div>
+                                Comprar!
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <a class="nav-link" onclick = " ">
-                                <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
-                                Ver Lista de Compras
-                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link" href="login.html">Iniciar Sesión</a>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -55,20 +49,46 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">Daxcsa</h1>
+                        <div id="header-sin-salto">
+                            <div class="row">
+                                <div class="col"></br>                                
+                                    <span class="float-left"> <h1 class="mt-4">Daxcsa</h1> </span> 
+                                    <img src="imagenes/logo.png"  class="rounded float-right" width = '4%' class="img-fluid" alt="Responsive image">
+                                </div>
+                            </div>
+                        </div>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Tu tienda de confianza</li>
+                            <li class="breadcrumb-item active">Pasión por la Curación</li>
                         </ol>
-                        <h4 class="mt-4">Compra regalos para el día de la Madre</h4>
+                        <div class="text-center">
+                            <img src="imagenes/logo.png" width = '30%' class="img-fluid" alt="Responsive image">
+                        </div>
+                        <ol class="breadcrumb mb-4">                   
+                            <div class="card mb-4">                                
+                                <div class="card-body">
+                                    <p class="mb-0">
+                                        <h4 class="mt-4"> Acerca de</h4>                                    
+                                        Daxcsa es una tienda en línea que ofrece una amplia gama de productos, 
+                                        desde electrónica hasta moda y hogar, y se centra en brindar a los clientes 
+                                        una experiencia de compra fácil y cómoda con envío rápido y eficiente. <br>
+                                        La plataforma se asegura de que los productos ofrecidos sean de alta calidad y a
+                                        precios competitivos, y cuenta con una sección de comentarios y reseñas de clientes 
+                                        para ayudar a los usuarios a tomar decisiones informadas sobre sus compras.                                        
+                                    </p>                                
+                                </div>                            
+                            </div> 
+                        </ol>
                         <div class="card mb-4">
                             <div class="card-body">
                                 <div class="card-body">
                                     <form>
-                                        <div class="row">
+                                        <a href = "login.html">
+                                        <div class="row"> 
                                             <div class="col-xl-3 col-md-6">
                                                 <div class="card bg-success text-white mb-4">
                                                     <div class="card-body">Ofertas y Promociones</div>
                                                     <div class="card-footer d-flex align-items-center justify-content-between">
+                                                        
                                                         <img src="https://www.tramapublicidad.com/files/img/noticias/00000000EX.jpg" 
                                                         alt="Ofertas y promociones" style="max-width: 100%; height: auto;">
                                                     </div>
@@ -137,23 +157,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div></a>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                    </div>                
+                        <div style="height: 40vh"></div>
+                        <div class="card mb-4"><div class="card-body">
+                        Contáctanos: <i class="fas fa-home"></i> 9a. Avenida 6-30, Zona 1 Guatemala. <i class="fas fa-phone-alt"></i>  P.B.X. +502 2384-3221  <i class="fas fa-phone-alt"></i>   Laboratorio:  +502 2384-2025, <i class="fas fa-phone-alt"></i>  +502 2322-9024 
+                        <a href = 'https://www.facebook.com/'><i class='fab fa-facebook-f'> </i></a></div></div>
+                    </div>
                 </main>
-                <script>  
-                    function comprar_productos(){
-                        indice = getParametro('indice');
-                        window.location.href = "comprarProducto.html?indice="+indice;         
-                    }
-
-                    function getParametro(nombre) {
-                        return (window.location.search.match(new RegExp('[?&]' + nombre + '=([^&]+)')) || [, null])[1];
-                    }
-                </script>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">

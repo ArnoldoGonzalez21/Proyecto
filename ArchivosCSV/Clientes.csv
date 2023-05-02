@@ -2,13 +2,13 @@ nombre;apellido;nombre_usuario;password;telefono
 Darwin;Arevalo;darwinarevalo;password;87288901
 Juan;Perez;perez;passwordjuan;12349873
 Juan;De arco;arco_juana;arco1997;24180921
-Sofia;Álvarez;sa123;contraseña1;1234567890
-Luis;González;lg456;contraseña2;2345678901
-Valeria;Ruíz;vr789;contraseña3;3456789012
-Francisco;Juárez;fj101;contraseña4;4567890123
-Ana;Martinez;am234;contraseña5;5678901234
-Eduardo;Pérez;ep567;contraseña6;6789012345
-Mariana;Hernández;mh890;contraseña7;7890123456
-Jorge;Rodríguez;jr1234;contraseña8;8901234567
-Gabriela;Flores;gf5678;contraseña9;9012345678
-Carlos;García;cg9012;contraseña10;0123456789
+Sofia;Alvarez;sa123;contrasena1;1234567890
+Luis;Gonzalez;lg456;contrasena2;2345678901
+Valeria;Ruiz;vr789;contrasena3;3456789012
+Francisco;Juarez;fj101;contrasena4;4567890123
+Ana;Martinez;am234;contrasena5;5678901234
+Eduardo;Perez;ep567;contrasena6;6789012345
+Mariana;Hernandez;mh890;contrasena7;7890123456
+Jorge;Rodriguez;jr1234;contrasena8;8901234567
+Gabriela;Flores;gf5678;contrasena9;9012345678
+Carlos;Garcia;cg9012;contrasena10;0123456789

@@ -19,7 +19,7 @@ class Producto():
             "compra":self.compra,
         }
            
-    def agregar_venta(self, venta, paciente, compra):
+    def agregar_venta(self, venta, cliente, compra):
         self.venta = venta 
-        self.paciente = paciente
+        self.cliente = cliente
         self.compra = compra    

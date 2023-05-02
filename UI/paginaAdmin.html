@@ -34,11 +34,11 @@
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Opciones</div>
                             <a class="nav-link" href='#'>
-                                <div class="sb-nav-link-icon"><i href='#' class="fas fa-user-injured"></i></div>
+                                <div class="sb-nav-link-icon"><i href='#' class="fas fa-user-alt"></i></div>
                                 Clientes
                             </a>
                             <a class="nav-link collapsed" href='#'>
-                                <div class="sb-nav-link-icon"><i href='#' class="fas fa-user-md"></i></div>
+                                <div class="sb-nav-link-icon"><i href='#' class="fas fa-laptop"></i></div>
                                 Productos
                             </a>
                         </div>
@@ -162,10 +162,9 @@
                     }
 
                     /*------------------------Registro Productos-------------------------*/
-                    function registro_productos(en_id, en_nombre, en_precio, en_descrip, en_cant){
+                    function registro_productos(en_nombre, en_precio, en_descrip, en_cant){
                         var ruta = "http://127.0.0.1:3000/registro_producto";
                         const datos = JSON.stringify({
-                            id: en_id,
                             nombre: en_nombre,
                             precio: en_precio,
                             descripcion: en_descrip,
@@ -194,12 +193,11 @@
                             let lines = manipular_csv(e.target.result);
                             let salida = convertir_matriz(lines);
                             for (var i = 1; i < salida[0].length; i++) {
-                                id_salida = salida[0][i];
-                                nombre_salida = salida[1][i];
-                                precio_salida = salida[2][i];
-                                descripcion_salida = salida[3][i];
-                                cantidad_salida = salida[4][i];
-                                let reg = registro_productos(id_salida, nombre_salida,precio_salida,
+                                nombre_salida = salida[0][i];
+                                precio_salida = salida[1][i];
+                                descripcion_salida = salida[2][i];
+                                cantidad_salida = salida[3][i];
+                                let reg = registro_productos(nombre_salida,precio_salida,
                                 descripcion_salida,cantidad_salida);
                             }
                             console.log(salida);

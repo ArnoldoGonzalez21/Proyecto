@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Pedido Medicamento</title>
+        <title>Pedido Producto</title>
         <link href="css/styles.css" rel="stylesheet" />
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
@@ -21,7 +21,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" onclick = 'actualizar_datos()'>Actualizar Datos</a> 
+                            <a class="dropdown-item" onclick = ''>Actualizar Datos</a> 
                             <a class="dropdown-item" href="login.html">Cerrar Sesión</a>                           
                         </div>
                     </li>
@@ -34,17 +34,17 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Opciones</div>
-                            <a class="nav-link" onclick = 'ir_solicitar_cita()'>
-                                <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
-                                Solicita una Cita
+                            <a class="nav-link" onclick = "inicio()">
+                                <div class="sb-nav-link-icon"><i class="fas fa-house-user"></i></div>
+                                Inicio
                             </a>
-                            <a class="nav-link" onclick = 'ver_estado_cita()'>
+                            <a class="nav-link" onclick = "comprar_producto()">
                                 <div class="sb-nav-link-icon"><i class="fas fa-calendar-check"></i></div>
-                                Estado de la Cita
+                                Comprar Productos
                             </a>
-                            <a class="nav-link" onclick = 'comprar_medicamento()'>
+                            <a class="nav-link" href = #>
                                 <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
-                                Comprar Medicamento
+                                Ver Lista de Compras
                             </a>
                         </div>
                     </div>
@@ -60,8 +60,8 @@
                         <div id="header-sin-salto">
                             <div class="row">
                                 <div class="col"></br>                                
-                                    <span class="float-left"> <h1 class="mt-4">AG Hospital </h1> </span> 
-                                    <span class="float-right"> <a id = "btnCarritoCompras" type="button" class="btn btn-success" onclick='comprar_medicamento()'><i class="fas fa-shopping-cart"></i> Seguir Comprando</a></span> 
+                                    <span class="float-left"> <h1 class="mt-4">Daxcsa</h1> </span> 
+                                    <span class="float-right"> <a id = "btnCarritoCompras" type="button" class="btn btn-success" onclick='comprar_producto()'><i class="fas fa-shopping-cart"></i> Seguir Comprando</a></span> 
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                             <li class="breadcrumb-item active">Tu tienda de confianza</li>
                         </ol>
                         <h4 class="mt-4">Productos</h4>
-                        <div class="table-responsive" id="tablaMedicamento"></div>
+                        <div class="table-responsive" id="tablaProducto"></div>
                     </div>
                 </main>
                 <script>
@@ -77,56 +77,45 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Precio ( Q )</th>
+                            <th>Precio (Q)</th>
                             <th>Cantidad</th>
-                            <th>Subtotal ( Q )</th>
+                            <th>Subtotal (Q)</th>
                         </tr>
-                    </thead>
-                </table>`
+                    </thead>`
                 var despues = `</tbody>
-                </table>`
-                const indicePaciente = getParametro('indice');
+                </table><span class="float-right">
+                <a type="button" class="btn btn-primary" onclick = "">Registrar Pedido</a></td></span> <span class="float-right"> 
+                </span>`
+                const indiceCliente = getParametro('indice');
                 var total = 0;
                 var productos;
                 var subtotal = [];
                 let xhr = new XMLHttpRequest();
-                var ruta = "http://127.0.0.1:3000/obtener_medicamento";
+                var ruta = "http://127.0.0.1:3000/obtener_producto";
                 xhr.open('GET', ruta);
                 xhr.send()
                 xhr.onreadystatechange = (e) => {
                     productos = JSON.parse(xhr.responseText);
                     var cuerpo = "";
-                    var cuerpo2 = "";
                     for (var i = 0; i < productos.length; i++) {
                         if(parseInt(productos[i].compra) > 0){                            
-                            if(productos[i].compra > 0 && productos[i].paciente == indicePaciente){
+                            if(productos[i].compra > 0 && productos[i].cliente == indiceCliente){
                                 subtotal[i] = parseInt(productos[i].compra) * parseFloat(productos[i].precio);
                                 cuerpo += '<tr>';
-                                cuerpo2 += '<tr>';
                                 cuerpo += '<td>' + productos[i].nombre + '</td>';
-                                cuerpo2 += '<td>' + productos[i].nombre + '</td>';
                                 cuerpo += '<td>' + productos[i].precio + '</td>';
-                                cuerpo2 += '<td>' + productos[i].precio + '</td>';
                                 cuerpo += '<td>' + productos[i].compra + '</td>';
-                                cuerpo2 += '<td>' + productos[i].compra + '</td>';
                                 cuerpo += '<td>' + subtotal[i] + '</td>';
-                                cuerpo2 += '<td>' + subtotal[i] + '</td>';
                                 total += subtotal[i];
-                                cuerpo += '<td><a type="button" class="btn btn-danger" href="eliminarMedicamentoPedido.html?indice=' + indicePaciente + '&posicion=' + i + '&compra=' + productos[i].compra + '">Eliminar</a></td>';
-                                cuerpo += '</tr>';
-                                cuerpo2 += '</tr>';
+                                cuerpo += '<td><a type="button" class="btn btn-danger" '+ 
+                                    '&posicion=' + i + '&compra=' + productos[i].compra + '">Eliminar</a></td></tr>';
                             }
                         }
                     }
-                    cuerpo += '<td></td><td></td>';
-                    cuerpo += '<td><b>Total</b></td>';
+                    cuerpo += '<td><b>Total (Q)</b></td>';
                     cuerpo += '<td><input class="form-control py-2" id="inputTotal" value='+ total/2 +' type="number" readonly/></td>';
                     cuerpo += '</tr>';
-                    cuerpo2 += '<td></td><td></td>';
-                    cuerpo2 += '<td><b>Total</b></td>'
-                    cuerpo2 += '<td>'+total/2+'</td>';
-                    cuerpo2 += '</tr>';
-                    document.getElementById("tablaMedicamento").innerHTML = antes + cuerpo + despues;
+                    document.getElementById("tablaProducto").innerHTML = antes + cuerpo + despues;
                 }
 
                 let compras = [];
@@ -141,45 +130,14 @@
                     return (window.location.search.match(new RegExp('[?&]' + nombre + '=([^&]+)')) || [, null])[1];
                 }
 
-                function actualizar_datos(){
-                    indice = getParametro('indice');                                
-                    window.location.href = "modificarPerfil.html?status=paciente&indice="+indice;                            
-                }
-
-                function ver_estado_cita(){
+                function comprar_producto(){
                     indice = getParametro('indice');
-                    window.location.href = "estadoCita.html?indice="+indice;         
+                    window.location.href = "comprarProducto.html?indice="+indice;         
                 }
-
-                function ir_solicitar_cita(){
-                    indice = getParametro('indice');
-                    window.location.href = "paciente.html?indice="+indice;         
+                function inicio(){
+                        indice = getParametro('indice');
+                        window.location.href = "cliente.html?indice="+indice;         
                 }
-
-                function comprar_medicamento(){
-                    indice = getParametro('indice');
-                    window.location.href = "comprarMedicamento.html?indice="+indice;         
-                }
-
-                function eliminar_compra(){
-                    var ruta = "https://proyecto2-2021.herokuapp.com/eliminar_compra";
-                    const datos = JSON.stringify({
-                        paciente: indicePaciente,
-                    })
-                    const parametros={
-                            headers:{
-                            'content-type':'application/json; charset=utf-8'
-                        },
-                        body: datos,
-                        method: 'POST',
-                    };
-                    fetch(ruta,parametros)
-                    .then(data=>{ return data.json()})
-                    .then(res=>{console.log(res)    
-                    })
-                    .then(error=>console.log(error))
-                }               
-
                 </script>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
