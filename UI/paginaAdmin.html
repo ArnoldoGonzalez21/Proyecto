@@ -162,13 +162,14 @@
                     }
 
                     /*------------------------Registro Productos-------------------------*/
-                    function registro_productos(en_nombre, en_precio, en_descrip, en_cant){
+                    function registro_productos(en_nombre, en_precio, en_descrip, en_cant,en_imagen){
                         var ruta = "http://127.0.0.1:3000/registro_producto";
                         const datos = JSON.stringify({
                             nombre: en_nombre,
                             precio: en_precio,
                             descripcion: en_descrip,
-                            cantidad: en_cant
+                            cantidad: en_cant,
+                            imagen: en_imagen
                         })
                         const parametros={
                             headers:{
@@ -197,8 +198,9 @@
                                 precio_salida = salida[1][i];
                                 descripcion_salida = salida[2][i];
                                 cantidad_salida = salida[3][i];
+                                imagen_salida = salida[4][i];
                                 let reg = registro_productos(nombre_salida,precio_salida,
-                                descripcion_salida,cantidad_salida);
+                                descripcion_salida,cantidad_salida,imagen_salida);
                             }
                             console.log(salida);
                             alert('Archivo agregado con exito')

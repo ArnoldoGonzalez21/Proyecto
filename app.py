@@ -72,7 +72,8 @@ def registro_producto():
     precio = contenido['precio']
     descripcion = contenido['descripcion']
     cantidad = contenido['cantidad']
-    producto_nuevo = Producto(nombre, precio, descripcion, cantidad, 0, -1, 0)
+    imagen = contenido['imagen']
+    producto_nuevo = Producto(nombre, precio, descripcion, cantidad, 0, -1, 0, imagen)
     global productos
     productos.append(producto_nuevo)
     return jsonify({'agregado':3,'mensaje':'Registro Exitoso'})

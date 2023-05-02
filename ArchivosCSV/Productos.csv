@@ -1,11 +1,11 @@
-Nombre;Precio;Descripcion;Cantidad
-Laptop Dell;8000;Laptop de alta gama con procesador Intel Core i7, memoria RAM de 16GB y almacenamiento SSD de 512GB;10
-Smartphone Samsung;2000;Smartphone con pantalla AMOLED de 6.5 pulgadas, procesador Exynos 9820, 128GB de almacenamiento y camara trasera triple de 12MP";20
-Smart TV LG;5000;"Televisor inteligente con pantalla OLED de 55 pulgadas, resolucion 4K, sonido Dolby Atmos y sistema operativo WebOS;5
-Tablet iPad;3000;Tableta de Apple con pantalla retina de 10.2 pulgadas, procesador A14 Bionic y soporte para Apple Pencil y Smart Keyboard;15
-Audifonos Sony;500;Audifonos inalambricos con cancelacion de ruido, bateria de larga duracion y comodo diseno plegable;30
-Camara Canon;3500;Camara DSLR con sensor CMOS de 26.2 megapixeles, procesador DIGIC 8, grabacion de video 4K y pantalla tactil de angulo variable";7
-Bocina JBL;1000;"Bocina portatil con bateria recargable de iones de litio, resistente al agua y diseno a prueba de golpes";25
-Refrigerador Samsung;7000;"Refrigerador de dos puertas con tecnologia Twin Cooling Plus, dispensador de agua y hielo y capacidad de 21 pies cubicos";3
-Horno de microondas Panasonic;1000;"Horno de microondas con tecnologia Inverter, funcion de coccion rapida y capacidad de 1.6 pies cubicos";12
-Consola Xbox;4000;"Consola de videojuegos con procesador AMD Zen 2, graficos de alta fidelidad y capacidad de jugar juegos en linea con amigos";8
+Nombre;Precio;Descripcion;Cantidad;Imagen
+Laptop Dell;8000;Laptop de alta gama con procesador Intel Core i7, memoria RAM de 16GB y almacenamiento SSD de 512GB;10;https://computerstoregt.com/wp-content/uploads/2022/07/34011.jpg
+Smartphone Samsung;2000;Smartphone con pantalla AMOLED de 6.5 pulgadas, procesador Exynos 9820, 128GB de almacenamiento y camara trasera triple de 12MP";20;https://m.media-amazon.com/images/I/819stUwa7RL.jpg
+Smart TV LG;5000;"Televisor inteligente con pantalla OLED de 55 pulgadas, resolucion 4K, sonido Dolby Atmos y sistema operativo WebOS;5;https://www.lg.com/cac/images/televisores/md07504074/gallery/D-1.jpg
+Tablet iPad;3000;Tableta de Apple con pantalla retina de 10.2 pulgadas, procesador A14 Bionic y soporte para Apple Pencil y Smart Keyboard;15;https://www.max.com.gt/media/catalog/product/m/y/myfm2lza_2.jpg
+Audifonos Sony;500;Audifonos inalambricos con cancelacion de ruido, bateria de larga duracion y comodo diseno plegable;30;https://www.max.com.gt/media/catalog/product/cache/40cff66e483d5074b1ae49efef994171/w/h/whxb910nbcuc.jpg
+Camara Canon;3500;Camara DSLR con sensor CMOS de 26.2 megapixeles, procesador DIGIC 8, grabacion de video 4K y pantalla tactil de angulo variable";7;https://www.max.com.gt/media/catalog/product/e/o/eosm200.jpg
+Bocina JBL;1000;"Bocina portatil con bateria recargable de iones de litio, resistente al agua y diseno a prueba de golpes";25;https://www.max.com.gt/media/catalog/product/cache/40cff66e483d5074b1ae49efef994171/j/b/jblflip6blk.jpg
+Refrigerador Samsung;7000;"Refrigerador de dos puertas con tecnologia Twin Cooling Plus, dispensador de agua y hielo y capacidad de 21 pies cubicos";3;https://www.max.com.gt/media/catalog/product/r/s/rs27t5200s9.jpg
+Horno de microondas Panasonic;1000;"Horno de microondas con tecnologia Inverter, funcion de coccion rapida y capacidad de 1.6 pies cubicos";12;https://www.max.com.gt/media/catalog/product/n/n/nnsb428sruh.jpg
+Consola Xbox;4000;"Consola de videojuegos con procesador AMD Zen 2, graficos de alta fidelidad y capacidad de jugar juegos en linea con amigos";8;https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4mRni?ver=8361
