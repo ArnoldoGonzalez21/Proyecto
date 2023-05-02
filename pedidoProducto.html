@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Pedido Medicamento</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand">Daxcsa</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <!-- Navbar-->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <ul class="navbar-nav ml-auto ml-md-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" onclick = 'actualizar_datos()'>Actualizar Datos</a> 
+                            <a class="dropdown-item" href="login.html">Cerrar Sesión</a>                           
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Opciones</div>
+                            <a class="nav-link" onclick = 'ir_solicitar_cita()'>
+                                <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                                Solicita una Cita
+                            </a>
+                            <a class="nav-link" onclick = 'ver_estado_cita()'>
+                                <div class="sb-nav-link-icon"><i class="fas fa-calendar-check"></i></div>
+                                Estado de la Cita
+                            </a>
+                            <a class="nav-link" onclick = 'comprar_medicamento()'>
+                                <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                                Comprar Medicamento
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Daxcsa</div>
+                        Tu tienda de confizana
+                    </div>
+                </nav>
+            </div>          
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <div id="header-sin-salto">
+                            <div class="row">
+                                <div class="col"></br>                                
+                                    <span class="float-left"> <h1 class="mt-4">AG Hospital </h1> </span> 
+                                    <span class="float-right"> <a id = "btnCarritoCompras" type="button" class="btn btn-success" onclick='comprar_medicamento()'><i class="fas fa-shopping-cart"></i> Seguir Comprando</a></span> 
+                                </div>
+                            </div>
+                        </div>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Tu tienda de confianza</li>
+                        </ol>
+                        <h4 class="mt-4">Productos</h4>
+                        <div class="table-responsive" id="tablaMedicamento"></div>
+                    </div>
+                </main>
+                <script>
+                var antes = `<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio ( Q )</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal ( Q )</th>
+                        </tr>
+                    </thead>
+                </table>`
+                var despues = `</tbody>
+                </table>`
+                const indicePaciente = getParametro('indice');
+                var total = 0;
+                var productos;
+                var subtotal = [];
+                let xhr = new XMLHttpRequest();
+                var ruta = "http://127.0.0.1:3000/obtener_medicamento";
+                xhr.open('GET', ruta);
+                xhr.send()
+                xhr.onreadystatechange = (e) => {
+                    productos = JSON.parse(xhr.responseText);
+                    var cuerpo = "";
+                    var cuerpo2 = "";
+                    for (var i = 0; i < productos.length; i++) {
+                        if(parseInt(productos[i].compra) > 0){                            
+                            if(productos[i].compra > 0 && productos[i].paciente == indicePaciente){
+                                subtotal[i] = parseInt(productos[i].compra) * parseFloat(productos[i].precio);
+                                cuerpo += '<tr>';
+                                cuerpo2 += '<tr>';
+                                cuerpo += '<td>' + productos[i].nombre + '</td>';
+                                cuerpo2 += '<td>' + productos[i].nombre + '</td>';
+                                cuerpo += '<td>' + productos[i].precio + '</td>';
+                                cuerpo2 += '<td>' + productos[i].precio + '</td>';
+                                cuerpo += '<td>' + productos[i].compra + '</td>';
+                                cuerpo2 += '<td>' + productos[i].compra + '</td>';
+                                cuerpo += '<td>' + subtotal[i] + '</td>';
+                                cuerpo2 += '<td>' + subtotal[i] + '</td>';
+                                total += subtotal[i];
+                                cuerpo += '<td><a type="button" class="btn btn-danger" href="eliminarMedicamentoPedido.html?indice=' + indicePaciente + '&posicion=' + i + '&compra=' + productos[i].compra + '">Eliminar</a></td>';
+                                cuerpo += '</tr>';
+                                cuerpo2 += '</tr>';
+                            }
+                        }
+                    }
+                    cuerpo += '<td></td><td></td>';
+                    cuerpo += '<td><b>Total</b></td>';
+                    cuerpo += '<td><input class="form-control py-2" id="inputTotal" value='+ total/2 +' type="number" readonly/></td>';
+                    cuerpo += '</tr>';
+                    cuerpo2 += '<td></td><td></td>';
+                    cuerpo2 += '<td><b>Total</b></td>'
+                    cuerpo2 += '<td>'+total/2+'</td>';
+                    cuerpo2 += '</tr>';
+                    document.getElementById("tablaMedicamento").innerHTML = antes + cuerpo + despues;
+                }
+
+                let compras = [];
+                function agregar_carrito(indice_compra){
+                    compras[compras.length] = indice_compra;
+                    compras.forEach(function(elemento, indice, array) {
+                    console.log("elemento: ",elemento, " indice: ",indice);
+                    })
+                }
+
+                function getParametro(nombre) {
+                    return (window.location.search.match(new RegExp('[?&]' + nombre + '=([^&]+)')) || [, null])[1];
+                }
+
+                function actualizar_datos(){
+                    indice = getParametro('indice');                                
+                    window.location.href = "modificarPerfil.html?status=paciente&indice="+indice;                            
+                }
+
+                function ver_estado_cita(){
+                    indice = getParametro('indice');
+                    window.location.href = "estadoCita.html?indice="+indice;         
+                }
+
+                function ir_solicitar_cita(){
+                    indice = getParametro('indice');
+                    window.location.href = "paciente.html?indice="+indice;         
+                }
+
+                function comprar_medicamento(){
+                    indice = getParametro('indice');
+                    window.location.href = "comprarMedicamento.html?indice="+indice;         
+                }
+
+                function eliminar_compra(){
+                    var ruta = "https://proyecto2-2021.herokuapp.com/eliminar_compra";
+                    const datos = JSON.stringify({
+                        paciente: indicePaciente,
+                    })
+                    const parametros={
+                            headers:{
+                            'content-type':'application/json; charset=utf-8'
+                        },
+                        body: datos,
+                        method: 'POST',
+                    };
+                    fetch(ruta,parametros)
+                    .then(data=>{ return data.json()})
+                    .then(res=>{console.log(res)    
+                    })
+                    .then(error=>console.log(error))
+                }               
+
+                </script>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Arnoldo Luis Antonio González Camey</div>
+                            <div><a> &copy; 2023</a></div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
+    </body>
+</html>

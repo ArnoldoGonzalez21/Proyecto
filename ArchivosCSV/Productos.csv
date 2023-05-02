@@ -1,0 +1,11 @@
+id;Nombre;Precio;Descripcion;Cantidad
+P001;Laptop Dell;8000;Laptop de alta gama con procesador Intel Core i7, memoria RAM de 16GB y almacenamiento SSD de 512GB;10
+P002;Smartphone Samsung;2000;Smartphone con pantalla AMOLED de 6.5 pulgadas, procesador Exynos 9820, 128GB de almacenamiento y cámara trasera triple de 12MP";20
+P003;Smart TV LG;5000;"Televisor inteligente con pantalla OLED de 55 pulgadas, resolución 4K, sonido Dolby Atmos y sistema operativo WebOS;5
+P004;Tablet iPad;3000;Tableta de Apple con pantalla retina de 10.2 pulgadas, procesador A14 Bionic y soporte para Apple Pencil y Smart Keyboard;15
+P005;Audífonos Sony;500;Audífonos inalámbricos con cancelación de ruido, batería de larga duración y cómodo diseño plegable;30
+P006;Cámara Canon;3500;Cámara DSLR con sensor CMOS de 26.2 megapíxeles, procesador DIGIC 8, grabación de video 4K y pantalla táctil de ángulo variable";7
+P007;Bocina JBL;1000;"Bocina portátil con batería recargable de iones de litio, resistente al agua y diseño a prueba de golpes";25
+P008;Refrigerador Samsung;7000;"Refrigerador de dos puertas con tecnología Twin Cooling Plus, dispensador de agua y hielo y capacidad de 21 pies cúbicos";3
+P009;Horno de microondas Panasonic;1000;"Horno de microondas con tecnología Inverter, función de cocción rápida y capacidad de 1.6 pies cúbicos";12
+P010;Consola Xbox;4000;"Consola de videojuegos con procesador AMD Zen 2, gráficos de alta fidelidad y capacidad de jugar juegos en línea con amigos";8

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Página Administrator</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="paginaAdmin.html">Daxcsa</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <!-- Navbar-->
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <ul class="navbar-nav ml-auto ml-md-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="login.html">Cerrar Sesión</a>                            
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Opciones</div>
+                            <a class="nav-link" href='#'>
+                                <div class="sb-nav-link-icon"><i href='#' class="fas fa-user-injured"></i></div>
+                                Clientes
+                            </a>
+                            <a class="nav-link collapsed" href='#'>
+                                <div class="sb-nav-link-icon"><i href='#' class="fas fa-user-md"></i></div>
+                                Productos
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Daxcsa</div>
+                        Tu tienda de confianza
+                    </div>
+                </nav>
+            </div>          
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Administrador</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Carga de archivos</li>
+                        </ol>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Clientes</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <label for="fileCSVCliente">Seleccionar Archivo:</label>
+                                        <input type="file" id="fileCSVCliente" onclick = 'carga_masiva_cliente()'/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Productos</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <label for="fileCSVProducto">Seleccionar Archivo:</label>
+                                        <input type="file" id="fileCSVProducto" onclick = 'carga_masiva_producto()'/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </main>
+                <script>
+                    extension = '';
+                    /*------------------------Registro Clientes-------------------------*/
+                    function register_personal(en_nombre, en_apell, en_user, en_contra, en_tel){
+                        var ruta = "http://127.0.0.1:3000/registro_cliente";
+                        const datos = JSON.stringify({
+                            nombre: en_nombre,
+                            apellido: en_apell,
+                            nombre_usuario: en_user,
+                            password: en_contra,
+                            telefono: en_tel,
+                        })
+                        const parametros={
+                            headers:{
+                                'content-type':'application/json; charset=utf-8'
+                            },
+                            body: datos,
+                            method: 'POST',
+                        };
+                        fetch(ruta,parametros)
+                        .then(data=>{ return data.json()})
+                        .then(res=>{console.log(res)
+                            console.log(res.mensaje)
+                        })
+                        .then(error=>console.log(error))
+                    }
+
+                    function leer_Archivo(evt) {
+                        let file = evt.target.files[0];
+                        let reader = new FileReader();
+                        reader.onload = (e) => {
+                            // Cuando el archivo se terminó de cargar
+                            let lines = manipular_csv(e.target.result);
+                            let salida = convertir_matriz(lines);
+                            for (var i = 1; i < salida[0].length; i++) {
+                                nombre_salida = salida[0][i];
+                                apellido_salida = salida[1][i];
+                                nombre_usuario_salida = salida[2][i];
+                                contrasena_salida = salida[3][i];
+                                telefono_salida = salida[4][i];
+                                let reg = register_personal(nombre_salida, apellido_salida,nombre_usuario_salida, 
+                                contrasena_salida, telefono_salida);
+                            }
+                            console.log(salida);
+                            alert('Archivo agregado con exito')
+                        };
+                        // Leemos el contenido del archivo seleccionado
+                        reader.readAsBinaryString(file);
+                    }
+
+                    /*------------------------Métodos CSV-------------------------*/
+                    function manipular_csv(text) {
+                        // Obtenemos las lineas del texto
+                        let lines = text.replace(/\r/g, '').split('\n');
+                        return lines.map(line => {
+                            // Por cada linea obtenemos los valores
+                            let values = line.split(';');
+                            return values;
+                        });
+                    }
+
+                    function convertir_matriz(matrix){
+                        let salida = [];
+                        // Por cada fila
+                        matrix.forEach((values, row) => {
+                            // Vemos los valores y su posicion
+                            values.forEach((value, col) => {
+                            // Si la posición aún no fue creada
+                            if (salida[col] === undefined) salida[col] = [];
+                            salida[col][row] = value;
+                            });
+                        });
+                        return salida;
+                    }
+
+                    /*------------------------Métodos Listener-------------------------*/
+                    function carga_masiva_cliente(){
+                        document.getElementById('fileCSVCliente').addEventListener('change', leer_Archivo, false); 
+                    }
+                    function carga_masiva_producto(){
+                        document.getElementById('fileCSVProducto').addEventListener('change', leer_Archivo_Producto, false); 
+                    }
+
+                    /*------------------------Registro Productos-------------------------*/
+                    function registro_productos(en_id, en_nombre, en_precio, en_descrip, en_cant){
+                        var ruta = "http://127.0.0.1:3000/registro_producto";
+                        const datos = JSON.stringify({
+                            id: en_id,
+                            nombre: en_nombre,
+                            precio: en_precio,
+                            descripcion: en_descrip,
+                            cantidad: en_cant
+                        })
+                        const parametros={
+                            headers:{
+                                'content-type':'application/json; charset=utf-8'
+                            },
+                            body: datos,
+                            method: 'POST',
+                        };
+                        fetch(ruta,parametros)
+                        .then(data=>{ return data.json()})
+                        .then(res=>{console.log(res)
+                            console.log(res.mensaje)
+                        })
+                        .then(error=>console.log(error))
+                    }
+
+                    function leer_Archivo_Producto(evt) {
+                        let fileMed = evt.target.files[0];
+                        let readerMed = new FileReader();
+                        readerMed.onload = (e) => {
+                            // Cuando el archivo se terminó de cargar
+                            let lines = manipular_csv(e.target.result);
+                            let salida = convertir_matriz(lines);
+                            for (var i = 1; i < salida[0].length; i++) {
+                                id_salida = salida[0][i];
+                                nombre_salida = salida[1][i];
+                                precio_salida = salida[2][i];
+                                descripcion_salida = salida[3][i];
+                                cantidad_salida = salida[4][i];
+                                let reg = registro_productos(id_salida, nombre_salida,precio_salida,
+                                descripcion_salida,cantidad_salida);
+                            }
+                            console.log(salida);
+                            alert('Archivo agregado con exito')
+                        };
+                        // Leemos el contenido del archivo seleccionado
+                        readerMed.readAsBinaryString(fileMed);
+                    }
+                </script>
+                
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Arnoldo Luis Antonio González Camey</div>
+                            <div><a> &copy; 2023</a></div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
+    </body>
+</html>
