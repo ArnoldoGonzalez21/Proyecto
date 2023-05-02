@@ -1,0 +1,18 @@
+E-commerce orders
+
+Daxcsa is an online store who wants to renew its interfaces to improve the user's experience when using their site. One of the high-priority tasks for them is to improve the customer's orders section and their details of each of their orders.
+
+For this challenge, your first task is to build an API to provide the customer's orders. The exercise's idea is to design the endpoints as well as the output that each one will have. It is not necessary to make a database connection, you can use a configuration file or a data structure to store the information.
+
+The second task is to design and build the UI for it to show the list of orders and the details of each one. you can add any button or link that you consider necessary even if it has no functionality. Find attached different examples of the order's list and details.
+
+Considerations:
+-The API should be flexible to add more functionality
+-The interface should be responsive
+-The performance is important
+-We evaluate the technologies, design patterns and best practices used
+-Coding standard and naming conventions is a plus
+
+You have to publish a screenshot of the interfaces and the source code of your project on any of the following platforms: GitHub, GitLab or Bitbucket, and then, send us the link.
+
+
